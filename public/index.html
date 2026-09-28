@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kindling — a mini social app</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div id="toast" class="toast" hidden></div>
+
+<!-- ===== Logged-out gate ===== -->
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card">
+    <h1 class="brand">Kindling</h1>
+    <p class="brand-sub">Small posts. Real threads. No noise.</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Log in</button>
+      <button class="auth-tab" data-tab="register">Sign up</button>
+    </div>
+
+    <form id="login-form" class="auth-form">
+      <label>Username or email
+        <input type="text" name="username" required autocomplete="username" />
+      </label>
+      <label>Password
+        <input type="password" name="password" required autocomplete="current-password" />
+      </label>
+      <button type="submit" class="btn btn-primary">Log in</button>
+      <p class="auth-error" id="login-error"></p>
+    </form>
+
+    <form id="register-form" class="auth-form" hidden>
+      <label>Username
+        <input type="text" name="username" required minlength="3" maxlength="30" />
+      </label>
+      <label>Email
+        <input type="email" name="email" required />
+      </label>
+      <label>Password
+        <input type="password" name="password" required minlength="6" autocomplete="new-password" />
+      </label>
+      <button type="submit" class="btn btn-primary">Create account</button>
+      <p class="auth-error" id="register-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== Main app ===== -->
+<div id="app" class="app" hidden>
+
+  <aside class="sidebar">
+    <h1 class="brand brand-sm">Kindling</h1>
+    <nav class="nav">
+      <button class="nav-link active" data-view="feed">Feed</button>
+      <button class="nav-link" data-view="following">Following</button>
+      <button class="nav-link" data-view="profile" id="nav-profile">My profile</button>
+    </nav>
+
+    <div class="composer">
+      <textarea id="composer-input" placeholder="Share something…" maxlength="500"></textarea>
+      <button id="composer-submit" class="btn btn-primary btn-block">Post</button>
+    </div>
+
+    <button id="logout-btn" class="btn btn-ghost btn-block">Log out</button>
+  </aside>
+
+  <main class="main">
+    <div id="view-title" class="view-title">Feed</div>
+    <div id="post-list" class="post-list"></div>
+  </main>
+
+  <aside class="side-panel" id="profile-panel" hidden>
+    <div class="profile-card">
+      <div class="avatar avatar-lg" id="profile-avatar"></div>
+      <h2 id="profile-username"></h2>
+      <p id="profile-bio" class="muted"></p>
+      <div class="profile-stats">
+        <div><strong id="profile-posts">0</strong><span>Posts</span></div>
+        <div><strong id="profile-followers">0</strong><span>Followers</span></div>
+        <div><strong id="profile-following">0</strong><span>Following</span></div>
+      </div>
+      <button id="profile-follow-btn" class="btn btn-primary btn-block" hidden>Follow</button>
+      <div id="profile-bio-edit" hidden>
+        <textarea id="bio-input" maxlength="160" placeholder="Tell people about yourself…"></textarea>
+        <button id="bio-save" class="btn btn-secondary btn-block">Save bio</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ===== Comment thread modal ===== -->
+<div id="thread-modal" class="modal" hidden>
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div id="thread-post"></div>
+    <div class="thread-comments" id="thread-comments"></div>
+    <form id="comment-form" class="comment-form">
+      <input type="text" id="comment-input" placeholder="Write a reply…" maxlength="300" required />
+      <button type="submit" class="btn btn-primary">Reply</button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
